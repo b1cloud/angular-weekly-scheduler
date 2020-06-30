@@ -13,7 +13,13 @@ angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'
 
       $scope.model = {
         locale: localeService.$locale.id,
-        options: {/*monoSchedule: true*/},
+        options: {
+          /*monoSchedule: true*/
+          /*showWeeks: false,*/
+          /*showSlotDate: false,*/
+          /*minDate:moment('2015-10-27'),*/
+          /*maxDate:moment('2016-05-27'),*/
+        },
         items: [{
           label: 'Item 1',
           editable: false,
@@ -34,13 +40,17 @@ angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'
           label: 'Item 3',
           schedules: [
             {start: moment('2017-08-09').toDate(), end: moment('2017-08-21').toDate()},
-            {start: moment('2017-09-12').toDate(), end: moment('2017-10-12').toDate()}
+            {start: moment('2017-09-12').toDate(), end: moment('2017-10-12').toDate(),className:'red',cursor:'pointer'}
           ]
         }]);
       }, 1000);
 
       this.doSomething = function (itemIndex, scheduleIndex, scheduleValue) {
         $log.debug('The model has changed!', itemIndex, scheduleIndex, scheduleValue);
+      };
+
+      this.onClick = function(item, schedule) {
+        console.log('clicked here');
       };
 
       this.onLocaleChange = function () {

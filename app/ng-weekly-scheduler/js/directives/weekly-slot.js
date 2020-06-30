@@ -5,17 +5,27 @@ angular.module('weeklyScheduler')
       restrict: 'E',
       require: ['^weeklyScheduler', 'ngModel'],
       templateUrl: 'ng-weekly-scheduler/views/weekly-slot.html',
+      scope: {
+        schedule: '=',
+        item: '=',
+        onClick: '&',
+      },
       link: function (scope, element, attrs, ctrls) {
         var schedulerCtrl = ctrls[0], ngModelCtrl = ctrls[1];
         var conf = schedulerCtrl.config;
         var index = scope.$parent.$index;
         var containerEl = element.parent();
         var resizeDirectionIsStart = true;
+        debugger;
         var valuesOnDragStart = {start: scope.schedule.start, end: scope.schedule.end};
 
         var pixelToVal = function (pixel) {
           var percent = pixel / containerEl[0].clientWidth;
           return Math.floor(percent * conf.nbWeeks + 0.5);
+        };
+
+        scope.clicked= function() {
+          scope.onClick({item: scope.item, schedule: scope.schedule});
         };
 
         var mergeOverlaps = function () {

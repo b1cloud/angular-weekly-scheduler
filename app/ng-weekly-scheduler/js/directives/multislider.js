@@ -17,6 +17,10 @@ angular.module('weeklyScheduler')
       restrict: 'E',
       require: '^weeklyScheduler',
       templateUrl: 'ng-weekly-scheduler/views/multi-slider.html',
+      scope: {
+        onClick: '&',
+        item: '&'
+      },
       link: function (scope, element, attrs, schedulerCtrl) {
         var conf = schedulerCtrl.config;
 
@@ -31,6 +35,10 @@ angular.module('weeklyScheduler')
         var pixelToVal = function (pixel) {
           var percent = pixel / element[0].clientWidth;
           return Math.floor(percent * (conf.nbWeeks) + 0.5);
+        };
+
+        scope.clicked = function(item, schedule) {
+          scope.onClick({item: item, schedule: schedule});
         };
 
         var addSlot = function (start, end) {

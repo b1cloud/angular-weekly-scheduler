@@ -16,17 +16,26 @@ angular.module('weeklyScheduler')
      */
     function config(schedules, options) {
       var now = moment();
+      var minDate = 0;
+      var maxDate = 0;
 
-      // Calculate min date of all scheduled events
-      var minDate = (schedules ? schedules.reduce(function (minDate, slot) {
-        return timeService.compare(slot.start, 'isBefore', minDate);
-      }, now) : now).startOf('week');
+      if (!options.minDate) {
+        // Calculate min date of all scheduled events
+        minDate = (schedules ? schedules.reduce(function (minDate, slot) {
+          return timeService.compare(slot.start, 'isBefore', minDate);
+        }, now) : now).startOf('week');
+      }else{
+        minDate = options.minDate;
+      }
 
-      // Calculate max date of all scheduled events
-      var maxDate = (schedules ? schedules.reduce(function (maxDate, slot) {
-        return timeService.compare(slot.end, 'isAfter', maxDate);
-      }, now) : now).clone().add(1, 'year').endOf('week');
-
+      if (!options.maxDate) {
+        // Calculate max date of all scheduled events
+        maxDate = (schedules ? schedules.reduce(function (maxDate, slot) {
+          return timeService.compare(slot.end, 'isAfter', maxDate);
+        }, now) : now).clone().add(1, 'year').endOf('week');
+      }else{
+        maxDate = options.maxDate;
+      }
       // Calculate nb of weeks covered by minDate => maxDate
       var nbWeeks = timeService.weekDiff(minDate, maxDate);
 
@@ -60,6 +69,9 @@ angular.module('weeklyScheduler')
       link: function (scope, element, attrs, schedulerCtrl) {
         var optionsFn = $parse(attrs.options),
           options = angular.extend(defaultOptions, optionsFn(scope) || {});
+
+        var onClick = $parse(attrs.onClick)(scope);
+        scope.onClick = onClick;
 
         // Get the schedule container element
         var el = element[0].querySelector(defaultOptions.selector);
