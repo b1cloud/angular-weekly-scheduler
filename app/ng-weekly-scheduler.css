@@ -1,5 +1,6 @@
 /*---------------------------------------------------------------- Scheduler */
 .scheduler {
+  display: block;
   background: #fff;
   border: 1px solid #ccc;
   margin-bottom: 10px;
@@ -33,6 +34,38 @@
   max-width: 100%;
 }
 
+@media only screen and (max-width: 600px) {
+  .schedule-area {
+    overflow-x: scroll;
+    flex-grow: 1;
+    min-width: 1800%;
+  }
+}
+
+@media only screen and (max-width: 900px) and (min-width: 601px) {
+  .schedule-area {
+    overflow-x: scroll;
+    flex-grow: 1;
+    min-width: 1100%;
+  }
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 901px) {
+  .schedule-area {
+    overflow-x: scroll;
+    flex-grow: 1;
+    min-width: 800%;
+  }
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 1101px) {
+  .schedule-area {
+    overflow-x: scroll;
+    flex-grow: 1;
+    min-width: 600%;
+  }
+}
+
 .scheduler .srow {
   position: relative;
   height: 35px;
@@ -44,13 +77,12 @@
   position: relative;
 }
 
-.scheduler .timestamps .grid-container div {
-  border-right: 1px solid #eee;
-  cursor: pointer;
+.today {
+  background: #eaeaff;
 }
 
-.scheduler .timestamps .grid-container div:hover {
-  background-color: #f0f0f0;
+.scheduler .timestamps .grid-container div {
+  border-right: 1px solid #eee;
 }
 
 .scheduler .timestamps .grid-container div:last-child {
@@ -102,27 +134,34 @@ multi-slider weekly-slot {
   background: #4eb8d5;
 }
 
-multi-slider weekly-slot.red{
-  background-color : #ff7777 !important;
+multi-slider weekly-slot.red {
+  background-color: #ff7777 !important;
 }
-multi-slider weekly-slot.green{
-  background-color : #b0d877 !important;
+
+multi-slider weekly-slot.green {
+  background-color: #b0d877 !important;
 }
-multi-slider weekly-slot.blue{
-  background-color : #93cbf9 !important;
+
+multi-slider weekly-slot.blue {
+  background-color: #93cbf9 !important;
 }
-multi-slider weekly-slot.yellow{
-  background-color : #ffff00 !important;
+
+multi-slider weekly-slot.yellow {
+  background-color: #F2E174 !important;
+}
+
+multi-slider weekly-slot.grey {
+  background-color: #A9A9A9 !important;
+}
+
+multi-slider weekly-slot.orange {
+  background-color: #fcac6f !important;
 }
 
 multi-slider weekly-slot.disable {
   cursor: not-allowed;
   color: #666;
   background: #c0c0c0;
-}
-
-multi-slider weekly-slot.pointer {
-  cursor: pointer;
 }
 
 multi-slider weekly-slot .handle {
@@ -207,6 +246,18 @@ multi-slider weekly-slot.active {
   background: #fafafa;
 }
 
+.grid-item.saturday {
+  background: #ededed;
+}
+
+.grid-item.sunday {
+  background: #ededed;
+}
+
+.grid-item.holiday {
+  background: #ffeaea;
+}
+
 .github-fork-ribbon:after {
   line-height: 1em;
 }
@@ -215,9 +266,11 @@ multi-slider weekly-slot.active {
 .schedule-animate {
   transition: opacity 200ms ease-out;
 }
+
 .schedule-animate.ng-enter, .schedule-animate.ng-hide-remove {
   opacity: 0;
 }
+
 .schedule-animate.ng-leave, .schedule-animate.ng-hide-add {
   display: none;
   opacity: 1;

@@ -1,23 +1,20 @@
 <div class="labels">
-  <div class="srow text-right">{{schedulerCtrl.config.labels.month || 'Month'}}</div>
-  <div ng-show = "schedulerCtrl.config.showWeeks" class="srow text-right">{{schedulerCtrl.config.labels.weekNb || 'Week number'}}</div>
-  <div class="schedule-animate" ng-repeat="item in schedulerCtrl.items" inject></div>
+  <div class="srow text-right">{{schedulerCtrl.config.labels.month }}</div>
+  <div class="srow text-right">{{schedulerCtrl.config.labels.days}}</div>
+  <div class="schedule-animate" ng-repeat="item in schedulerCtrl.items | filter: filters" inject></div>
 </div>
 
 <div class="schedule-area-container">
-  <div class="schedule-area">
-
+  <div class="schedule-area" >
     <div class="srow timestamps">
       <monthly-grid class="grid-container"></monthly-grid>
     </div>
-
-    <div ng-show = "schedulerCtrl.config.showWeeks" class="srow timestamps">
-      <weekly-grid class="grid-container"></weekly-grid>
+    <div class="srow timestamps">
+      <daily-grid class="grid-container"></daily-grid>
     </div>
-
-    <div class="srow schedule-animate" ng-repeat="item in schedulerCtrl.items">
-      <weekly-grid class="grid-container striped" no-text></weekly-grid>
-      <multi-slider index="{{$index}}" on-click="onClick(item, schedule)"></multi-slider>
+    <div class="srow schedule-animate" ng-repeat="item in schedulerCtrl.items | filter : filters">
+      <daily-grid class="grid-container" no-text></daily-grid>
+      <multi-slider index="{{$index}}" on-add="onAdd(label,slot)" item="item" on-delete="onDelete(item, schedule)" on-click="onClick(item, schedule)"></multi-slider>
     </div>
   </div>
 </div>

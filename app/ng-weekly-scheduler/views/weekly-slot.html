@@ -1,6 +1,6 @@
-<div title="{{schedule.start | date}} - {{schedule.end | date}}" ng-click="clicked()">
-  <div class="handle left" ondrag="resize" ondragstart="startResizeStart" ondragstop="endDrag" handle></div>
-  <div ng-class="{hidden: schedulerCtrl.config.showSlotDate == false}" ondrag="drag" ondragstart="startDrag" ondragstop="endDrag" handle>{{schedule.start | date}} - {{schedule.end | date}}</div>
-  <div class="handle right" ondrag="resize" ondragstart="startResizeEnd" ondragstop="endDrag" handle></div>
-  <div ng-class="{hidden: schedulerCtrl.config.showSlotDate == false}" class="remove"><span class="glyphicon glyphicon-remove"></span></div>
+<div title="{{schedule.start | date }} - {{schedule.end | date }}" ng-Style="" ng-click="clicked()">
+  <div ng-show="item.editable !== false" class="handle left" ondrag="resize" ondragstart="startResizeStart" ondragstop="endDrag" handle></div>
+  <div ondrag="drag" ondragstart="startDrag" ondragstop="endDrag" handle>{{schedule.label}}</br>{{schedule.start | date:"dd MMM"}} - {{schedule.end | date:"dd MMM"}}
+  </div>
+  <div ng-show="item.editable !== false" class="handle right" ondrag="resize" ondragstart="startResizeEnd" ondragstop="endDrag" handle></div>
 </div>
